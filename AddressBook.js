@@ -2,6 +2,7 @@
 const ps = require("prompt-sync");
 const prompt = ps(); // to take input from the terminal
 const validate = require("./AddressBookValidation.js"); 
+const BookOperations = require("./ContactOperartion"); 
 let AddressBook = new Array();
 
 class Contact{
@@ -28,7 +29,7 @@ while(true){
     simultaniously validate the input
     */
     console.log("Select option ")
-    let option = prompt("1.Add 2.Edit 3.Delete ") //to add the option from the terminal
+    let option = prompt("1.Add 2.Edit 3.Delete 4.Number of Contacts") //to add the option from the terminal
     if(option ==1){
         insertContact();
     }
@@ -135,10 +136,14 @@ while(true){
                     AddressBook.pop(contact);
                 }
                 else{
-                    console.log("Indo doesn't exist");
+                    console.log("Info doesn't exist");
                 }
             })
         }
+    }
+
+    if(option==4){
+        BookOperations.countContacts(AddressBook);
     }
     console.log(AddressBook);
 }
