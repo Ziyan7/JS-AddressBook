@@ -28,7 +28,7 @@ while(true){
     simultaniously validate the input
     */
     console.log("Select option ")
-    let option = prompt("1.Add ") //to add the option from the terminal
+    let option = prompt("1.Add 2.Edit ") //to add the option from the terminal
     if(option ==1){
         insertContact();
     }
@@ -105,6 +105,25 @@ while(true){
             insertContact();//if error occurs call the function again
         }
         AddressBook.push(new Contact(firstName, lastName, address, city, state, zip, phoneNumber, email)); //adding new contacts to the Addressbook array
+    }
+
+    if(option==2){
+        if(AddressBook.length == 0)
+            console.log("Addressbook is empty. Please Add contacts to edit");
+        else{
+            let person = prompt("Enter the persons First name to edit in the contact: ");
+            AddressBook.forEach((contact)=> {
+            if (person == contact.firstName){
+                contact.lastName = prompt("Enter Your last Name: ");
+                contact.address = prompt("Enter Your Address: ");
+                contact.city = prompt("Enter Your city Name: ");
+                contact.state = prompt("Enter Your state Name: ");
+                contact.zip = prompt("Enter Your zip code: ");
+                contact.phoneNumber = prompt("Enter Your phone number: ");
+                contact.email = prompt("Enter Your emailId: ");
+            }})
+        }
+
     }
 
     console.log(AddressBook);
