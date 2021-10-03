@@ -24,11 +24,11 @@ class Contact{
 
 while(true){
     /*
-    Function to add new contact
+    Function to add new contact and
     simultaniously validate the input
     */
     console.log("Select option ")
-    let option = prompt("1.Add 2.Edit ") //to add the option from the terminal
+    let option = prompt("1.Add 2.Edit 3.Delete ") //to add the option from the terminal
     if(option ==1){
         insertContact();
     }
@@ -106,14 +106,14 @@ while(true){
         }
         AddressBook.push(new Contact(firstName, lastName, address, city, state, zip, phoneNumber, email)); //adding new contacts to the Addressbook array
     }
-
+    //Condition for editing the existing contacts
     if(option==2){
-        if(AddressBook.length == 0)
+        if(AddressBook.length == 0) //checks if the Addressbook is empty
             console.log("Addressbook is empty. Please Add contacts to edit");
         else{
             let person = prompt("Enter the persons First name to edit in the contact: ");
-            AddressBook.forEach((contact)=> {
-            if (person == contact.firstName){
+            AddressBook.forEach((contact)=> { 
+            if (person == contact.firstName){ //checks of the first name and input name matches to edit its details 
                 contact.lastName = prompt("Enter Your last Name: ");
                 contact.address = prompt("Enter Your Address: ");
                 contact.city = prompt("Enter Your city Name: ");
@@ -123,14 +123,22 @@ while(true){
                 contact.email = prompt("Enter Your emailId: ");
             }})
         }
-
     }
 
+    if(option==3){
+        if(AddressBook.length == 0) //checks if the Addressbook is empty
+            console.log("Addressbook is empty");
+        else{
+            let person = prompt("Enter the persons First name to delete the info from the contacts: ");
+            AddressBook.forEach((contact)=> { 
+                if (person == contact.firstName){
+                    AddressBook.pop(contact);
+                }
+                else{
+                    console.log("Indo doesn't exist");
+                }
+            })
+        }
+    }
     console.log(AddressBook);
 }
-
-    
-
-
-
-    
