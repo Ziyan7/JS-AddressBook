@@ -4,6 +4,7 @@ const prompt = ps(); // to take input from the terminal
 const validate = require("./AddressBookValidation.js"); 
 const BookOperations = require("./ContactOperartion"); 
 let AddressBook = new Array();
+let temp = true;
 
 class Contact{
     //property
@@ -24,6 +25,7 @@ class Contact{
 }
 
 while(true){
+    
     /*
     Function to add new contact and
     simultaniously validate the input
@@ -43,70 +45,89 @@ while(true){
             console.log(error);
             insertContact();//if error occurs call the function again
         }
-        let lastName = prompt("Enter Your last Name: ");
-        try{
-            validate.lastNameValidation(lastName);
-        }
-        catch (error) {
-            console.log(error);
-            insertContact();//if error occurs call the function again
-        }
+        if(AddressBook.length != 0)
+            temp = checkDuplicate(firstName); //checking if the given persons details already exist
+        if(temp == true){
+            let lastName = prompt("Enter Your last Name: ");
+            try{
+                validate.lastNameValidation(lastName);
+            }
+            catch (error) {
+                console.log(error);
+                insertContact();//if error occurs call the function again
+            }
+            
+            let address = prompt("Enter Your address: ");
+            try{
+                validate.addressValidation(address);
+            }
+            catch (error) {
+                console.log(error);
+                insertContact();//if error occurs call the function again
+            }
         
-        let address = prompt("Enter Your address: ");
-        try{
-            validate.addressValidation(address);
-        }
-        catch (error) {
-            console.log(error);
-            insertContact();//if error occurs call the function again
-        }
-    
-        let city = prompt("Enter Your city Name: ");
-        try{
-            validate.cityValidation(city);
-        }
-        catch (error) {
-            console.log(error);
-            insertContact();//if error occurs call the function again
-        }
-        
-        let state = prompt("Enter Your state Name: ");
-        try{
-            validate.stateValidation(state);
-        }
-        catch (error) {
-            console.log(error);
-            insertContact();//if error occurs call the function again
-        }
-        
-        let zip = prompt("Enter Zip code: ");
-        try{
-            validate.zipValidation(zip);
-        }
-        catch (error) {
-            console.log(error);
-            insertContact();//if error occurs call the function again
-        }
+            let city = prompt("Enter Your city Name: ");
+            try{
+                validate.cityValidation(city);
+            }
+            catch (error) {
+                console.log(error);
+                insertContact();//if error occurs call the function again
+            }
+            
+            let state = prompt("Enter Your state Name: ");
+            try{
+                validate.stateValidation(state);
+            }
+            catch (error) {
+                console.log(error);
+                insertContact();//if error occurs call the function again
+            }
+            
+            let zip = prompt("Enter Zip code: ");
+            try{
+                validate.zipValidation(zip);
+            }
+            catch (error) {
+                console.log(error);
+                insertContact();//if error occurs call the function again
+            }
 
-        let phoneNumber = prompt("Enter Your Phone Number: ");
-        try{
-            validate.phoneValidation(phoneNumber);
-        }
-        catch (error) {
-            console.log(error);
-            insertContact();//if error occurs call the function again
-        }
+            let phoneNumber = prompt("Enter Your Phone Number: ");
+            try{
+                validate.phoneValidation(phoneNumber);
+            }
+            catch (error) {
+                console.log(error);
+                insertContact();//if error occurs call the function again
+            }
 
-        let email = prompt("Enter Your emailId: ");
-        try{
-            validate.emailValidation(email);
+            let email = prompt("Enter Your emailId: ");
+            try{
+                validate.emailValidation(email);
+            }
+            catch (error) {
+                console.log(error);
+                insertContact();//if error occurs call the function again
+            }
+            AddressBook.push(new Contact(firstName, lastName, address, city, state, zip, phoneNumber, email));//adding new contacts to the Addressbook array
+            console.log(AddressBook);
         }
-        catch (error) {
-            console.log(error);
-            insertContact();//if error occurs call the function again
-        }
-        AddressBook.push(new Contact(firstName, lastName, address, city, state, zip, phoneNumber, email)); //adding new contacts to the Addressbook array
+        else {
+            console.log("Contact already Exist")
+        }  
     }
+
+    //funtion to check for the duplicates
+    function checkDuplicate(firstName){
+        AddressBook.forEach((contact)=> {
+            if(contact.firstName == firstName)
+                return false;
+            else
+                return true;
+        });
+    };
+
     //Condition for editing the existing contacts
     if(option==2){
         if(AddressBook.length == 0) //checks if the Addressbook is empty
@@ -124,6 +145,7 @@ while(true){
                 contact.email = prompt("Enter Your emailId: ");
             }})
         }
+        console.log(AddressBook);
     }
 
     if(option==3){
@@ -140,10 +162,12 @@ while(true){
                 }
             })
         }
+        console.log(AddressBook);
     }
 
     if(option==4){
         BookOperations.countContacts(AddressBook);
+        console.log(AddressBook);
     }
-    console.log(AddressBook);
+    
 }
