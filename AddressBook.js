@@ -30,7 +30,7 @@ while(true){
     simultaniously validate the input
     */
     console.log("Select option ")
-    let option = prompt("1.Add 2.Edit 3.Delete 4.Number of Contacts 5.Search by Place name 6.Count Contact by City or State 7.Sort Contact by Name") 
+    let option = prompt("1.Add 2.Edit 3.Delete 4.Number of Contacts 5.Search by Place name 6.Count Contact by City or State 7.Sort Contact by Name 8. Sort by City or State") 
     if(option ==1){
         insertContact();
     }
@@ -137,5 +137,9 @@ while(true){
     }
     if(option==7){
         BookOperations.sortByName(AddressBook);
+    }
+
+    if(option==8){
+        BookOperations.sortByCityOrName(AddressBook);
     }
 }
