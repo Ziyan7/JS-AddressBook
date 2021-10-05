@@ -42,4 +42,20 @@ function countState(AddressBook){
   },{});
   console.log(count);
 };
-module.exports = { countContacts ,searchPlace, countCity, countState};
+
+function sortByName(AddressBook){
+  let first, second;
+  const display = AddressBook.sort((a, b) => {
+    first = a.firstName.toLowerCase();
+    second = b.firstName.toLowerCase();
+    if (first < second) {
+      return -1;
+    }
+    if (first > second) {
+      return 1;
+    }
+  });
+  console.log(display)   
+};
+
+module.exports = { countContacts ,searchPlace, countCity, countState, sortByName};
