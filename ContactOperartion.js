@@ -5,4 +5,17 @@ function countContacts(AddressBook){
     },0)
     console.log(total);
 }
-module.exports = { countContacts };
+
+//method to search person contact in particular city or state
+function searchPlace(place, AddressBook){
+
+    function check(contact){
+      console.log(place);
+      console.log(contact.city);
+      if(contact.city == place || contact.state == place)
+        return true;
+    }
+    const temp = AddressBook.filter(check);
+    console.log(temp);
+  };
+module.exports = { countContacts ,searchPlace};
