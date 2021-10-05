@@ -6,7 +6,7 @@ function countContacts(AddressBook){
     console.log(total);
 }
 
-//method to search person contact in particular city or state
+//method to search persons contact in particular city or state
 function searchPlace(place, AddressBook){
 
     function check(contact){
@@ -18,4 +18,28 @@ function searchPlace(place, AddressBook){
     const temp = AddressBook.filter(check);
     console.log(temp);
   };
-module.exports = { countContacts ,searchPlace};
+
+//method to count number of contacts based on city using reduce
+function countCity(AddressBook){
+  const count = AddressBook.reduce(function(acc,current){
+    if(acc[current.city] )
+      acc[current.city] = ++acc[current.city];
+    else 
+      acc[current.city] =1;
+      return acc;
+  },{});
+  console.log(count);
+};
+
+//method to count number of contacts based on state using reduce
+function countState(AddressBook){
+  const count = AddressBook.reduce(function(acc,current){
+    if(acc[current.state] )
+      acc[current.state] = ++acc[current.state];
+    else 
+      acc[current.state] =1;
+    return acc;
+  },{});
+  console.log(count);
+};
+module.exports = { countContacts ,searchPlace, countCity, countState};

@@ -30,7 +30,7 @@ while(true){
     simultaniously validate the input
     */
     console.log("Select option ")
-    let option = prompt("1.Add 2.Edit 3.Delete 4.Number of Contacts 5.Search by Place name") //to add the option from the terminal
+    let option = prompt("1.Add 2.Edit 3.Delete 4.Number of Contacts 5.Search by Place name 6.Count Contact by City or State") //to add the option from the terminal
     if(option ==1){
         insertContact();
     }
@@ -124,7 +124,15 @@ while(true){
         console.log(AddressBook);
     }
     if(option==5){
-        let place = prompt("Enter city or place name");
+        let place = prompt("Enter city or State name :");
         BookOperations.searchPlace(place,AddressBook);
+    }
+    if(option==6){
+        let choice = prompt("1.Count by City 2.Count by State ");
+        if(choice == 1)
+            BookOperations.countCity(AddressBook);
+        else if(choice == 2)
+            BookOperations.countState(AddressBook);
+
     }
 }
